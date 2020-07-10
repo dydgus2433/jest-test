@@ -2,6 +2,11 @@ import { shallowMount } from '@vue/test-utils'
 import TodoTitle from '../TodoTitle'
 import axios from 'axios'
 
+/*
+가짜모듈로 만듦
+ */
+jest.mock('axios')
+
 describe('Todo Title Component', () => {
   let wrapper
   beforeEach(() => {
@@ -15,8 +20,9 @@ describe('Todo Title Component', () => {
     //     resolve(res)
     //   })
     // })
-    //위에 있는 코드와 같은코드
-    axios.get = jest.fn().mockResolvedValue(res)
+    // 위에 있는 코드와 같은코드
+    // axios.get = jest.fn().mockResolvedValue(res)
+    axios.get.mockResolvedValue(res)
     wrapper = shallowMount(TodoTitle)
   })
 
@@ -24,6 +30,14 @@ describe('Todo Title Component', () => {
     setTimeout(() => {
       expect(wrapper.text()).toBe('delectus aut autem')
     })
+  })
+
+  test('2', () => {
+    // expect(axios.get).toHaveBeenCalledTimes(2)
+    const spy = jest.spyOn(wrapper.vm, 'fetchTodo')
+    wrapper.vm.fetchTodo()
+    expect(spy).toHaveBeenCalled()
+    // expect(wrapper.vm.fetchTodo).toHaveBeenCalled()
   })
 })
 /*
