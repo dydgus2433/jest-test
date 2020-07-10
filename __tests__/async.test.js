@@ -7,7 +7,8 @@ function asyncFn () {
 }
 
 describe('비동기', () => {
-  test('테스트 1 ', (done) => {
+
+  test('done 테스트 1 ', (done) => {
     asyncFn()
       .then(r => {
         expect(r).toBe('Passes!')
@@ -25,5 +26,28 @@ describe('비동기', () => {
          * 사태 방지
          */
       })
+  })
+
+  test('then', () => {
+    return asyncFn().then(r => {
+      expect(r).toBe('Passes!')
+
+    })
+  })
+
+  test('resolves', () => {
+    /**
+     * return 해줘야 비동기인줄 인식하고 기다림
+     */
+    return expect(asyncFn()).resolves.toBe('Passes!')
+  })
+
+  /**
+   * 거의 대부분은 이 패턴을 사용
+   */
+  test('async/await', async () => {
+    const r = await asyncFn()
+    expect(r).toBe('Passes!')
+
   })
 })
