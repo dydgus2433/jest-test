@@ -11,5 +11,6 @@ describe('Message Component', () => {
     })
     expect(wrapper.vm.msg).toBe('World?')
     expect(wrapper.element.tagName).toBe('SPAN')
+    expect(wrapper.attributes().class).toBe('msg')
   })
 })
