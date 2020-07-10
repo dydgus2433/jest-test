@@ -3,12 +3,12 @@
 
 </template>
 <script>
-  import Message from './Message'
+import Message from './Message'
 
-  export default {
-    components: {
+export default {
+  components: {
     Message
-    }
   }
+}
 
 </script>
